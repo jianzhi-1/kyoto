@@ -7,6 +7,12 @@ members = [
     "crates/proto",
     "crates/router",
 ]
+resolver = "2"
+
+[workspace.lints.clippy]
+needless_return = "allow"
+unused_unit = "allow"
+
 
 [workspace.dependencies]
 tokio = { version = "1", features = ["full"] }
