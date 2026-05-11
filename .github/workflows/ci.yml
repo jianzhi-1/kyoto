@@ -38,39 +38,19 @@ jobs:
       - name: Run tests
         run: cargo test
 
-# Temporary solution for loading docs per crate on home page.
-docs:
-  name: Docs
-  runs-on: ubuntu-latest
-  permissions:
-    contents: write
-  steps:
-    - uses: actions/checkout@v4
-    - uses: dtolnay/rust-toolchain@stable
-    - name: Build docs
-      run: cargo doc --no-deps
-    - name: Add root index.html
-      run: |
-        cat > target/doc/index.html << 'EOF'
-        <!DOCTYPE html>
-        <html>
-        <head><meta charset="utf-8"><title>Kyoto Engine</title></head>
-        <body>
-          <h1>Kyoto Engine</h1>
-          <ul>
-            <li><a href="scheduler/">scheduler</a></li>
-            <li><a href="block_manager/">block_manager</a></li>
-            <li><a href="router/">router</a></li>
-            <li><a href="worker/">worker</a></li>
-            <li><a href="server/">server</a></li>
-            <li><a href="proto/">proto</a></li>
-          </ul>
-        </body>
-        </html>
-        EOF
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      if: github.ref == 'refs/heads/master'
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./target/doc
+  docs:
+    name: Docs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build docs
+        run: cargo doc --no-deps
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/doc
