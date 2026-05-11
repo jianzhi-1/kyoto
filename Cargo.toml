@@ -3,9 +3,9 @@ members = [
     "crates/server",
     "crates/scheduler",
     "crates/block-manager",
-    "crates/engine",
     "crates/worker",
     "crates/proto",
+    "crates/router",
 ]
 
 [workspace.dependencies]
