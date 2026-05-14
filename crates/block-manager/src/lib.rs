@@ -103,7 +103,7 @@ impl BlockManager {
             }
         }
 
-        if prompt_tokens.len() % self.block_size != 0 {
+        if prompt_tokens.len().is_multiple_of(self.block_size) {
             let block_id = self.allocate_fresh()?;
             block_table.push(block_id);
         }
@@ -123,8 +123,7 @@ impl BlockManager {
             .clone();
         let num_full_blocks = prompt_tokens.len() / self.block_size;
 
-        for i in 0..num_full_blocks {
-            let block_id = block_table[i];
+        for (i, &block_id) in block_table.iter().enumerate().take(num_full_blocks) {
             let start = i * self.block_size;
             let end = (i + 1) * self.block_size;
             let hash = Self::hash_tokens(&prompt_tokens[start..end]);
@@ -170,10 +169,8 @@ impl BlockManager {
             let block = &mut self.blocks[block_id];
             block.ref_count -= 1;
             if block.ref_count == 0 {
-                if let Some(hash) = block.content_hash {
-                    if self.prefix_cache.get(&hash) == Some(&block_id) {
+                if let Some(hash) = block.content_hash && self.prefix_cache.get(&hash) == Some(&block_id) {
                         self.prefix_cache.remove(&hash);
-                    }
                 }
                 block.state = BlockState::Free;
                 block.content_hash = None;
@@ -188,7 +185,7 @@ impl BlockManager {
 }
 
 fn num_blocks_needed(num_tokens: usize, block_size: usize) -> usize {
-    return (num_tokens + block_size - 1) / block_size;
+    return num_tokens.div_ceil(block_size);
 }
 
 #[cfg(test)]
