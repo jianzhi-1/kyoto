@@ -1,2 +1,2 @@
-createSrcSidebar('[["block_manager",["",[],["lib.rs"]]],["proto",["",[],["lib.rs"]]],["router",["",[],["lib.rs"]]],["scheduler",["",[],["lib.rs"]]],["server",["",[],["main.rs"]]],["worker",["",[],["lib.rs"]]]]');
-//{"start":19,"fragment_lengths":[36,29,30,33,31,30]}
+createSrcSidebar('[["block_manager",["",[],["lib.rs"]]],["proto",["",[],["lib.rs"]]],["router",["",[],["lib.rs"]]],["scheduler",["",[],["lib.rs"]]],["server",["",[],["main.rs"]]],["types",["",[],["lib.rs"]]],["worker",["",[],["lib.rs"]]]]');
+//{"start":19,"fragment_lengths":[36,29,30,33,31,29,30]}

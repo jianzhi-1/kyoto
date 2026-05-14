@@ -1,0 +1,1 @@
+rd_("AoReturns the argument unchanged.000000BaCalls <code>U::from(self)</code>.000000BnMetadata for a physical block in the KV cache.")

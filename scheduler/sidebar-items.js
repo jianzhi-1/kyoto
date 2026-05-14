@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":["PrefillScheduler","Request"],"type":["RequestId","TokenId"]};
+window.SIDEBAR_ITEMS = {"struct":["PrefillScheduler","SchedulerRequest"]};
