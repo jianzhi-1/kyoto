@@ -17,6 +17,9 @@ checksum = "c4512299f36f043ab09a583e57bceb5a5aab7a73db1805848e8fef3c9e8c78b3"
 [[package]]
 name = "block-manager"
 version = "0.1.0"
+dependencies = [
+ "types",
+]
 
 [[package]]
 name = "bumpalo"
@@ -224,6 +227,7 @@ checksum = "b39cdef0fa800fc44525c84ccb54a029961a8215f9619753635a9c0d2538d46d"
 name = "scheduler"
 version = "0.1.0"
 dependencies = [
+ "types",
  "uuid",
 ]
 
@@ -295,6 +299,10 @@ dependencies = [
  "quote",
  "unicode-ident",
 ]
+
+[[package]]
+name = "types"
+version = "0.1.0"
 
 [[package]]
 name = "unicode-ident"

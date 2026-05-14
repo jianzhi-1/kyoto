@@ -1,28 +1,11 @@
 use std::collections::VecDeque;
 use std::time::Instant;
-
-pub type TokenId = u32;
-pub type RequestId = u64;
+use types::{Request, RequestId};
 
 #[derive(Debug, Clone)]
-pub struct Request {
-    pub id: RequestId,
-    pub prompt_tokens: Vec<TokenId>,
+pub struct SchedulerRequest {
+    pub request: Request,
     pub arrival_time: Instant,
-}
-
-impl Request {
-    pub fn new(id: RequestId, prompt_tokens: Vec<TokenId>) -> Self {
-        Self {
-            id,
-            prompt_tokens,
-            arrival_time: Instant::now(),
-        }
-    }
-
-    pub fn num_tokens(&self) -> usize {
-        self.prompt_tokens.len()
-    }
 }
 
 #[derive(Debug)]
