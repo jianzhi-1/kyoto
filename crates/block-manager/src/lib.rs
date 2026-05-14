@@ -103,7 +103,7 @@ impl BlockManager {
             }
         }
 
-        if prompt_tokens.len().is_multiple_of(self.block_size) {
+        if !prompt_tokens.len().is_multiple_of(self.block_size) {
             let block_id = self.allocate_fresh()?;
             block_table.push(block_id);
         }
@@ -169,8 +169,10 @@ impl BlockManager {
             let block = &mut self.blocks[block_id];
             block.ref_count -= 1;
             if block.ref_count == 0 {
-                if let Some(hash) = block.content_hash && self.prefix_cache.get(&hash) == Some(&block_id) {
-                        self.prefix_cache.remove(&hash);
+                if let Some(hash) = block.content_hash
+                    && self.prefix_cache.get(&hash) == Some(&block_id)
+                {
+                    self.prefix_cache.remove(&hash);
                 }
                 block.state = BlockState::Free;
                 block.content_hash = None;
