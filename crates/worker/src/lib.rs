@@ -1,14 +1,25 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
+use block_manager::{AllocationError, BlockManager};
+use types::{RequestId, TokenId};
+
+#[derive(Debug)]
+pub enum WorkerError {
+    AllocationError(AllocationError),
+    EmptyBatch,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+#[derive(Debug)]
+pub struct PrefillOutput {}
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+#[derive(Debug)]
+pub struct DecodeOutput {}
+
+pub struct PrefillWorker {
+    pub block_manager: BlockManager,
+    vocab_size: u32,
+}
+
+pub struct DecodeWorker {
+    pub block_manager: BlockManager,
+    vocab_size: u32,
+    eos_token_id: TokenId,
 }
