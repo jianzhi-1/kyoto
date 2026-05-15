@@ -7,3 +7,6 @@ edition = "2024"
 workspace = true
 
 [dependencies]
+types = { path = "../types" }
+block-manager = { path = "../block-manager" }
+rand = "0.8"
